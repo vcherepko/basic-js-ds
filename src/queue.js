@@ -15,7 +15,7 @@ const { ListNode } = require('../extensions/list-node.js');
  */
 class Queue {
 
-  constructor(){
+  constructor() {
     this.a = null;
     this.b = null;
   }
@@ -25,12 +25,24 @@ class Queue {
   }
 
   enqueue(value) {
-    const lastAdd = new ListNode(value);
+    const ln = new ListNode(value);
+    
+    if (!this.a) {
+      this.a = ln;
+    } else {
+      this.b.next = ln;
+    }
+
+    this.b = ln; 
   }
 
   dequeue() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.a) 
+      return null;
+    let ret = this.a.value;
+
+    this.a = this.a.next;
+    return ret; 
   }
 }
 
